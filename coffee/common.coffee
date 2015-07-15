@@ -6,6 +6,7 @@ app =
     Models: {}
     Collections: {}
     path: '../'
+
 require.config paths:
     'blocks': app.path + 'Library/blocks'
     'jquery': app.path + 'Library/jquery-2.1.4.min'
