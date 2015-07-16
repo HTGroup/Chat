@@ -45,3 +45,4 @@ Temporary Items
 .idea
 node_modules
 build
+coffee/_tempCoffee/*

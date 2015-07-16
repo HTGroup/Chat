@@ -5,12 +5,14 @@
   "description": "learning",
   "keywords": [],
   "dependencies": {
+    "express": "^4.13.1",
     "grunt": "^0.4.5",
     "grunt-contrib-coffee": "^0.13.0",
     "grunt-contrib-concat": "^0.5.1",
     "grunt-contrib-uglify": "^0.8.0",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-forever": "^0.4.5",
+    "grunt-js2coffee": "^0.3.0",
     "grunt-newer": "^1.1.0",
     "socket.io": "^1.3.6"
   },

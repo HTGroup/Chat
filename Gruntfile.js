@@ -91,6 +91,55 @@ module.exports = function(grunt) {
                 files: ['coffee/Application/*.coffee', 'coffee/Collections/*.coffee', 'coffee/Models/*.coffee', 'coffee/Views/*.coffee', 'coffee/*.coffee', 'coffee/node/*.coffee'],
                 tasks: ['newer:coffee:Application','newer:coffee:Collections','newer:coffee:Models','newer:coffee:Views','newer:coffee:main','newer:coffee:Node']
             }
+        },
+        js2coffee: {
+            each: {
+                options: {},
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'js/Application',
+                        src: ['**/*.js'],
+                        dest: 'coffee/_tempCoffee/Application',
+                        ext: '.coffee'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'js/Collections',
+                        src: ['**/*.js'],
+                        dest: 'coffee/_tempCoffee/Collections',
+                        ext: '.coffee'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'js/Models',
+                        src: ['**/*.js'],
+                        dest: 'coffee/_tempCoffee/Models',
+                        ext: '.coffee'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'js/Views',
+                        src: ['**/*.js'],
+                        dest: 'coffee/_tempCoffee/Views',
+                        ext: '.coffee'
+                    },
+                    {
+                        expand: true,
+                        cwd: '',
+                        src: ['*.js'],
+                        dest: 'coffee/_tempCoffee/node',
+                        ext: '.coffee'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'js/',
+                        src: ['*.js'],
+                        dest: 'coffee/_tempCoffee',
+                        ext: '.coffee'
+                    }
+                ]
+            }
         }
     });
 
@@ -100,7 +149,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-forever');
     grunt.loadNpmTasks('grunt-newer');
+    grunt.loadNpmTasks('grunt-js2coffee');
 
-    grunt.registerTask('default', ['coffee:Application','coffee:Collections','coffee:Models','coffee:Views','coffee:main','coffee:Node','watch']);
+    grunt.registerTask('default', ['coffee:Application','coffee:Collections','coffee:Models','coffee:Views','coffee:main','coffee:Node','watch', "js2coffee"]);
 
 };

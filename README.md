@@ -28,7 +28,7 @@
         * If the install fails, try uninstalling any C++ 2010 x64&x86 Redistributable that you have installed first
         * If you get errors that the 64-bit compilers are not installed you may also need the [compiler update for the Windows SDK 7.1]
     * Windows 7/8:
-      * Microsoft Visual Studio C++ 2013 for Windows Desktop ([Express][msvc2013] version works well)
+      * Microsoft Visual Studio C++ 2013 for Windows Desktop
 
 #Run code
 

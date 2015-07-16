@@ -1,6 +1,6 @@
-http = require('http')
-http.createServer((req,res)->
-  res.end 'Hello world'
-
-).listen 1337, '127.0.0.1'
-console.log "Server running"
+express = require('express')
+app = express()
+app.get '/', (req, res) ->
+  res.send 'Hello World'
+  return
+app.listen 3000
