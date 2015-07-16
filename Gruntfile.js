@@ -71,6 +71,16 @@ module.exports = function(grunt) {
                 dest: '',
                 ext: '.js'
             },
+            NodeApplication: {
+                options: {
+                    bare: true
+                },
+                expand: true,
+                cwd: 'coffee/node',
+                src: ['application/**/*.coffee'],
+                dest: '',
+                ext: '.js'
+            },
             main: {
                 options: {
                     bare: true
@@ -88,8 +98,8 @@ module.exports = function(grunt) {
                 livereload: true
             },
             scripts:{
-                files: ['coffee/Application/*.coffee', 'coffee/Collections/*.coffee', 'coffee/Models/*.coffee', 'coffee/Views/*.coffee', 'coffee/*.coffee', 'coffee/node/*.coffee'],
-                tasks: ['newer:coffee:Application','newer:coffee:Collections','newer:coffee:Models','newer:coffee:Views','newer:coffee:main','newer:coffee:Node']
+                files: ['coffee/Application/*.coffee', 'coffee/Collections/*.coffee', 'coffee/Models/*.coffee', 'coffee/Views/*.coffee', 'coffee/*.coffee', 'coffee/node/*.coffee', 'coffee/node/application/**/*.coffee'],
+                tasks: ['newer:coffee:Application','newer:coffee:Collections','newer:coffee:Models','newer:coffee:Views','newer:coffee:main','newer:coffee:Node','newer:coffee:NodeApplication']
             }
         },
         js2coffee: {
@@ -151,6 +161,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-newer');
     grunt.loadNpmTasks('grunt-js2coffee');
 
-    grunt.registerTask('default', ['coffee:Application','coffee:Collections','coffee:Models','coffee:Views','coffee:main','coffee:Node','watch', "js2coffee"]);
+    grunt.registerTask('default', ['coffee:Application','coffee:Collections','coffee:Models','coffee:Views','coffee:main','coffee:Node','coffee:NodeApplication','watch', "js2coffee"]);
 
 };
