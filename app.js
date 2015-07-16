@@ -1,9 +1,34 @@
-var http;
+var app, express, http, io, pub;
 
-http = require('http');
+express = require('express');
 
-http.createServer(function(req, res) {
-  return res.end('Hello world');
-}).listen(1337, '127.0.0.1');
+app = express();
 
-console.log("Server running");
+http = require('http').Server(app);
+
+io = require('socket.io')(http);
+
+
+/* Path to our public directory */
+
+pub = __dirname + '/public';
+
+app.use(express["static"](pub));
+
+app.set('view engine', 'ejs');
+
+app.set('views', pub);
+
+app.get('/', function(req, res) {
+  res.render('index', {
+    title: 'iBuilder'
+  });
+});
+
+io.on('connection', function(socket) {
+  console.log('a user connected');
+});
+
+http.listen(3000, function() {
+  console.log('listening on *:3000');
+});

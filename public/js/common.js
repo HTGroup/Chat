@@ -14,7 +14,16 @@ require.config({
   paths: {
     'blocks': app.path + 'Library/blocks',
     'jquery': app.path + 'Library/jquery-2.1.4.min',
-    'velocity': app.path + 'Library/velocity'
+    'velocity': app.path + 'Library/velocity',
+    'socket': app.path + 'Library/socket.io.min'
+  },
+  shim: {
+    'jquery': {
+      exports: '$'
+    },
+    'socket': {
+      exports: 'io'
+    }
   }
 });
 
@@ -27,3 +36,8 @@ this.loadView = function(name) {
     });
   }
 };
+
+define(['socket'], function(io) {
+  var socket;
+  socket = io();
+});

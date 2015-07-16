@@ -24,7 +24,7 @@ module.exports = function(grunt) {
                 flatten: true,
                 cwd: 'coffee/Application',
                 src: ['*.coffee'],
-                dest: 'js/Application',
+                dest: 'public/js/Application',
                 ext: '.js'
             },
             Collections: {
@@ -35,7 +35,7 @@ module.exports = function(grunt) {
                 flatten: true,
                 cwd: 'coffee/Collections',
                 src: ['*.coffee'],
-                dest: 'js/Collections',
+                dest: 'public/js/Collections',
                 ext: '.js'
             },
             Models: {
@@ -46,7 +46,7 @@ module.exports = function(grunt) {
                 flatten: true,
                 cwd: 'coffee/Models',
                 src: ['*.coffee'],
-                dest: 'js/Models',
+                dest: 'public/js/Models',
                 ext: '.js'
             },
             Views: {
@@ -57,7 +57,7 @@ module.exports = function(grunt) {
                 flatten: true,
                 cwd: 'coffee/Views',
                 src: ['*.coffee'],
-                dest: 'js/Views',
+                dest: 'public/js/Views',
                 ext: '.js'
             },
             Node: {
@@ -79,7 +79,7 @@ module.exports = function(grunt) {
                 flatten: true,
                 cwd: 'coffee',
                 src: ['*.coffee'],
-                dest: 'js',
+                dest: 'public/js',
                 ext: '.js'
             }
         },
@@ -98,28 +98,28 @@ module.exports = function(grunt) {
                 files: [
                     {
                         expand: true,
-                        cwd: 'js/Application',
+                        cwd: 'public/js/Application',
                         src: ['**/*.js'],
                         dest: 'coffee/_tempCoffee/Application',
                         ext: '.coffee'
                     },
                     {
                         expand: true,
-                        cwd: 'js/Collections',
+                        cwd: 'public/js/Collections',
                         src: ['**/*.js'],
                         dest: 'coffee/_tempCoffee/Collections',
                         ext: '.coffee'
                     },
                     {
                         expand: true,
-                        cwd: 'js/Models',
+                        cwd: 'public/js/Models',
                         src: ['**/*.js'],
                         dest: 'coffee/_tempCoffee/Models',
                         ext: '.coffee'
                     },
                     {
                         expand: true,
-                        cwd: 'js/Views',
+                        cwd: 'public/js/Views',
                         src: ['**/*.js'],
                         dest: 'coffee/_tempCoffee/Views',
                         ext: '.coffee'
@@ -133,7 +133,7 @@ module.exports = function(grunt) {
                     },
                     {
                         expand: true,
-                        cwd: 'js/',
+                        cwd: 'public/js/',
                         src: ['*.js'],
                         dest: 'coffee/_tempCoffee',
                         ext: '.coffee'

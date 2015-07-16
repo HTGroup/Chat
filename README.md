@@ -33,7 +33,8 @@
 #Run code
 
 ```sh
-$ npm install -g node-gyp --python /path/to/python2.7
+$ npm install -g node-gyp --python /Python27/python.exe
 $ npm config set python /Python27/python.exe --global
 $ npm i -d
+$ node app
 ```
