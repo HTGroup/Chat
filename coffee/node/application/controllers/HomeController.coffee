@@ -8,9 +8,11 @@ _HomeController =
     test.save (err, users)->
       console.log(err, users)###
 
-    HomeModel.find().exec (err, home)->
-      v.render(
-        title: if home[0]? then home[0].name else "Hello World!"
-      )
+    #console.log HomeModel
+    v.render(
+      title: "Hello World!"
+    )
+    #HomeModel.find().exec (err, home)->
+
 
 module.exports = _HomeController

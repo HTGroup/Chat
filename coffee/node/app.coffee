@@ -12,31 +12,6 @@ pub = __dirname + '/public'
 require(applicationDirectory + 'controllers')(mongoose);
 routes = require(applicationDirectory + 'routes')()
 
-###mongoose = require('mongoose');
- dbConfig = require( applicationDirectory + 'db/config.json');
-
- mongoose.connect(dbConfig.url, dbConfig.opts, function (error) {
- if (error) {
- console.log(error);
- }
- });
-
- var Schema = mongoose.Schema;
-
- var kittySchema = new Schema({
- name: String
- });
- var Kitten = mongoose.model('kitten', kittySchema);
-
- var silence = new Kitten({ name: 'Silence' });
- silence.save(function (err, fluffy) {
- if (err) return console.error(err);
- console.log(fluffy)
- });
-
- return;
-###
-
 app.set 'views', 'views'
 app.set 'view engine', 'ejs'
 app.use express['static'](pub)
