@@ -46,3 +46,6 @@ Temporary Items
 node_modules
 build
 coffee/_tempCoffee/*
+application
+public/js/*
+!public/js/Library
