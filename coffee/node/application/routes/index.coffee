@@ -4,8 +4,7 @@ module.exports = (app) ->
 			type: 'get'
 			link: '/'
 			control: (req, res) ->
-				console.log(app)
-				res.render 'index', title: 'iBuilder'
+				HomeController.run(req, res);
 				return
 
 		about:

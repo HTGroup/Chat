@@ -1,4 +1,7 @@
-module.exports = (app) ->
+String::capitalize = ->
+  @charAt(0).toUpperCase() + @slice(1)
+
+module.exports = ->
   fs = require('fs')
   path = require('path')
   dir = __dirname + '/'
@@ -8,7 +11,7 @@ module.exports = (app) ->
     files.forEach (file) ->
       file = path.parse(file, '.js')
       return if file.name is "index"
-      app.Controllers[file.name] = require('./' + file.name)
+      global[file.name.capitalize()] = require('./' + file.name)
       return
     return
   return

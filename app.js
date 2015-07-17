@@ -1,4 +1,4 @@
-var app, application, applicationDirectory, config, express, http, io, mongoose, path, pub, routes;
+var app, applicationDirectory, config, express, http, i, io, mongoose, page, path, pub, routes;
 
 applicationDirectory = __dirname + '/application/';
 
@@ -16,24 +16,14 @@ io = require('socket.io')(http);
 
 mongoose = require('mongoose');
 
-pub = __dirname + '/public';
-
-application = {
-  Models: {},
-  Views: {},
-  Controllers: {}
-};
-
 
 /* Path to express public directory */
 
-require(applicationDirectory + 'models')(application);
+pub = __dirname + '/public';
 
-require(applicationDirectory + 'views')(application);
+require(applicationDirectory + 'controllers')(mongoose);
 
-require(applicationDirectory + 'controllers')(application);
-
-routes = require(applicationDirectory + 'routes')(application);
+routes = require(applicationDirectory + 'routes')();
 
 
 /*mongoose = require('mongoose');
@@ -61,27 +51,32 @@ routes = require(applicationDirectory + 'routes')(application);
  return;
  */
 
-app.set('views', pub);
+app.set('views', 'views');
 
 app.set('view engine', 'ejs');
 
 app.use(express['static'](pub));
 
 mongoose.connect('mongodb://' + config.mongo.host + ':' + config.mongo.port + '/test', function(err, db) {
-  var i, page;
   if (err != null) {
     return console.log(err);
   }
+  console.log('Successfully connected to mongodb://' + config.mongo.host + ':' + config.mongo.port);
+});
 
-  /* Routing */
-  for (i in routes) {
-    page = routes[i];
-    app[page.type](page.link, page.control);
-  }
 
-  /* Socket */
-  io.on('connection', function(socket) {});
-  http.listen(config.port, function() {
-    console.log('Successfully connected to mongodb://' + config.mongo.host + ':' + config.mongo.port, '\nExpress server listening on port ' + config.port, '\nLink server: http(s)://' + config.mongo.host + ':' + config.port);
-  });
+/* Routing */
+
+for (i in routes) {
+  page = routes[i];
+  app[page.type](page.link, page.control);
+}
+
+
+/* Socket */
+
+io.on('connection', function(socket) {});
+
+http.listen(config.port, function() {
+  console.log('Server started. Link: http(s)://' + config.mongo.host + ':' + config.port);
 });

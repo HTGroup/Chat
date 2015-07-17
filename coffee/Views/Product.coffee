@@ -6,7 +6,7 @@ define ->
     require [ app.path + 'Collections/Product' ], ->
         App = blocks.Application()
         App.View 'Products',
-            options: url: 'view/blog.tpl'
+            options: url: 'templates/blog.tpl'
             newProduct: app.Models.Product
             cnt: 1
             head: [

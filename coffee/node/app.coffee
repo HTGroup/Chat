@@ -6,19 +6,11 @@ config = require(applicationDirectory + 'config')()
 http = require('http').Server(app)
 io = require('socket.io')(http)
 mongoose = require('mongoose')
-pub = __dirname + '/public'
-application = {
-  Models: {},
-  Views: {},
-  Controllers: {},
-}
-
 ### Path to express public directory ###
+pub = __dirname + '/public'
 
-require(applicationDirectory + 'models')(application);
-require(applicationDirectory + 'views')(application);
-require(applicationDirectory + 'controllers')(application);
-routes = require(applicationDirectory + 'routes')(application)
+require(applicationDirectory + 'controllers')(mongoose);
+routes = require(applicationDirectory + 'routes')()
 
 ###mongoose = require('mongoose');
  dbConfig = require( applicationDirectory + 'db/config.json');
@@ -45,25 +37,25 @@ routes = require(applicationDirectory + 'routes')(application)
  return;
 ###
 
-app.set 'views', pub
+app.set 'views', 'views'
 app.set 'view engine', 'ejs'
 app.use express['static'](pub)
+
 mongoose.connect 'mongodb://' + config.mongo.host + ':' + config.mongo.port + '/test', (err, db) ->
-
   return console.log(err) if err?
+  console.log 'Successfully connected to mongodb://' + config.mongo.host + ':' + config.mongo.port
+  return
 
-  ### Routing ###
-  for i of routes
-    page = routes[i]
-    app[page.type] page.link, page.control
+### Routing ###
+for i of routes
+  page = routes[i]
+  app[page.type] page.link, page.control
 
-  ### Socket ###
-  io.on 'connection', (socket) ->
-    #console.log 'a user connected'
-    return
+### Socket ###
+io.on 'connection', (socket) ->
+#console.log 'a user connected'
+  return
 
-  http.listen config.port, ->
-    console.log 'Successfully connected to mongodb://' + config.mongo.host + ':' + config.mongo.port, '\nExpress server listening on port ' + config.port, '\nLink server: http(s)://' + config.mongo.host + ':' + config.port
-    return
-
+http.listen config.port, ->
+  console.log 'Server started. Link: http(s)://' + config.mongo.host + ':' + config.port
   return
