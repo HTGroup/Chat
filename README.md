@@ -78,13 +78,10 @@ $ cd application/models
 
 Models are defined through the Schema interface
 ```js
-var Schema = mongoose.Schema;
+Model = require("./index");
 
-var homePage = new Schema({
-    author    : ObjectId
-  , title     : String
-  , body      : String
-  , date      : Date
+module.exports = new Model('home', {
+  name: String
 });
 ```
 
@@ -115,8 +112,11 @@ $ cd application/views
 
 Each views inlet has: response and name template, and must also have three main parameters
 ```js
+path = require('path');
+filename = path.parse(__filename);
+
 module.exports = function(response, template) {
-  this.name = "Home";
+  this.name = filename.name;
   this.response = response;
   this.template = this.name + "/" + template;
 };
