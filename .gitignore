@@ -44,7 +44,5 @@ Temporary Items
 
 .idea
 node_modules
-coffee/_tempCoffee/*
-/application
-public/js/*
-!public/js/Library
+coffee
+coffee/*
