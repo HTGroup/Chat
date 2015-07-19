@@ -1,5 +1,8 @@
+path = require 'path'
+filename = path.parse __filename
+
 module.exports = (response, template) ->
-  @name = "Home"
+  @name = filename.name
   @response = response
   @template = @name + "/" + template
   return

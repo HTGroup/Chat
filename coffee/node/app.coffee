@@ -2,24 +2,22 @@ applicationDirectory = __dirname + '/application/'
 express = require('express')
 app = express()
 path = require('path')
-config = require(applicationDirectory + 'config')()
+config = require(applicationDirectory + 'config')
 http = require('http').Server(app)
 io = require('socket.io')(http)
-mongoose = require('mongoose')
 ### Path to express public directory ###
 pub = __dirname + '/public'
 
-require(applicationDirectory + 'controllers')(mongoose);
+### Adapter ###
+require(applicationDirectory + 'adapter')(config)
+
+require(applicationDirectory + 'controllers')();
 routes = require(applicationDirectory + 'routes')()
 
 app.set 'views', 'views'
 app.set 'view engine', 'ejs'
 app.use express['static'](pub)
 
-mongoose.connect 'mongodb://' + config.mongo.host + ':' + config.mongo.port + '/test', (err, db) ->
-  return console.log(err) if err?
-  console.log 'Successfully connected to mongodb://' + config.mongo.host + ':' + config.mongo.port
-  return
 
 ### Routing ###
 for i of routes
@@ -32,5 +30,5 @@ io.on 'connection', (socket) ->
   return
 
 http.listen config.port, ->
-  console.log 'Server started. Link: http(s)://' + config.mongo.host + ':' + config.port
+  console.log 'Server started. Link: http(s)://' + config.url + ':' + config.port
   return

@@ -1,10 +1,7 @@
-mongoose = require("mongoose")
-Schema = mongoose.Schema
+Model = require("./index")
 
-homePage = new Schema(
+module.exports = new Model('home',
   name: String
 )
-
-module.exports = mongoose.model('home', homePage)
 
 

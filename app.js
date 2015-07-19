@@ -1,4 +1,4 @@
-var app, applicationDirectory, config, express, http, i, io, mongoose, page, path, pub, routes;
+var app, applicationDirectory, config, express, http, i, io, page, path, pub, routes;
 
 applicationDirectory = __dirname + '/application/';
 
@@ -8,20 +8,23 @@ app = express();
 
 path = require('path');
 
-config = require(applicationDirectory + 'config')();
+config = require(applicationDirectory + 'config');
 
 http = require('http').Server(app);
 
 io = require('socket.io')(http);
-
-mongoose = require('mongoose');
 
 
 /* Path to express public directory */
 
 pub = __dirname + '/public';
 
-require(applicationDirectory + 'controllers')(mongoose);
+
+/* Adapter */
+
+require(applicationDirectory + 'adapter')(config);
+
+require(applicationDirectory + 'controllers')();
 
 routes = require(applicationDirectory + 'routes')();
 
@@ -30,13 +33,6 @@ app.set('views', 'views');
 app.set('view engine', 'ejs');
 
 app.use(express['static'](pub));
-
-mongoose.connect('mongodb://' + config.mongo.host + ':' + config.mongo.port + '/test', function(err, db) {
-  if (err != null) {
-    return console.log(err);
-  }
-  console.log('Successfully connected to mongodb://' + config.mongo.host + ':' + config.mongo.port);
-});
 
 
 /* Routing */
@@ -52,5 +48,5 @@ for (i in routes) {
 io.on('connection', function(socket) {});
 
 http.listen(config.port, function() {
-  console.log('Server started. Link: http(s)://' + config.mongo.host + ':' + config.port);
+  console.log('Server started. Link: http(s)://' + config.url + ':' + config.port);
 });
