@@ -47,28 +47,23 @@ First, we need to specify the connection in the configuration file: index.js.
 ```sh
 $ cd application/models
 ```
+For Example, we next is used for connection [`Mongoose`](https://github.com/Automattic/mongoose#connecting-to-mongodb)
 ```js
 _Config = {
-  local: {
-    mode: 'local',
-    port: 3000,
+  url: '127.0.0.1',
+  port: 3000,
+  mode: 'local',
+  dataBase: {
     mongo: {
       host: '127.0.0.1',
-      port: 27017
+      port: 27017,
+      user: "",
+      password: "",
+      table: "test"
     }
-  },
-  ...
+  }
 }
 ```
-Next is used for connection [`Mongoose`](https://github.com/Automattic/mongoose#connecting-to-mongodb) 
-```js
-var mongoose = require('mongoose');
-
-mongoose.connect('mongodb://' + config.mongo.host + ':' + config.mongo.port + '/test', function(err, db) {
-    ...
-});
-```
-
 ### Defining a Model
 
 To work with the models , we need to access the folder
