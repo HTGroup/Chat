@@ -45,7 +45,7 @@ $ node app
 
 First, we need to specify the connection in the configuration file: index.js.
 ```sh
-$ cd application/models
+$ cd application/config
 ```
 For Example, we next is used for connection [`Mongoose`](https://github.com/Automattic/mongoose#connecting-to-mongodb)
 ```js
