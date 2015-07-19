@@ -1,5 +1,11 @@
+var filename, path;
+
+path = require('path');
+
+filename = path.parse(__filename);
+
 module.exports = function(response, template) {
-  this.name = "Home";
+  this.name = filename.name;
   this.response = response;
   this.template = this.name + "/" + template;
 };

@@ -13,10 +13,8 @@ _HomeController = {
     test.save (err, users)->
       console.log(err, users)
      */
-    return HomeModel.find().exec(function(err, home) {
-      return v.render({
-        title: home[0] != null ? home[0].name : "Hello World!"
-      });
+    return v.render({
+      title: "Hello World!"
     });
   }
 };

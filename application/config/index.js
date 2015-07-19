@@ -1,32 +1,18 @@
 var _Config;
 
 _Config = {
-  local: {
-    mode: 'local',
-    port: 3000,
+  url: '127.0.0.1',
+  port: 3000,
+  mode: 'local',
+  dataBase: {
     mongo: {
       host: '127.0.0.1',
-      port: 27017
-    }
-  },
-  staging: {
-    mode: 'staging',
-    port: 4000,
-    mongo: {
-      host: '127.0.0.1',
-      port: 27017
-    }
-  },
-  production: {
-    mode: 'production',
-    port: 5000,
-    mongo: {
-      host: '127.0.0.1',
-      port: 27017
+      port: 27017,
+      user: "",
+      password: "",
+      table: "test"
     }
   }
 };
 
-module.exports = function(mode) {
-  return _Config[mode || process.argv[2] || 'local'] || _Config.local;
-};
+module.exports = _Config;

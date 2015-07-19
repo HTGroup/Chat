@@ -1,11 +1,7 @@
-var Schema, homePage, mongoose;
+var Model;
 
-mongoose = require("mongoose");
+Model = require("./index");
 
-Schema = mongoose.Schema;
-
-homePage = new Schema({
+module.exports = new Model('home', {
   name: String
 });
-
-module.exports = mongoose.model('home', homePage);
