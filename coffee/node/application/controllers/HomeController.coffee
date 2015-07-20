@@ -1,7 +1,7 @@
 View = require("../views/Home")
 HomeModel = require("../models/Home")
 
-_HomeController =
+class HomeController
   run: (req, res)->
     v = new View(res, 'index')
     ###test = new HomeModel({name: "AAAA"})
@@ -15,4 +15,4 @@ _HomeController =
     #HomeModel.find().exec (err, home)->
 
 
-module.exports = _HomeController
+module.exports = HomeController

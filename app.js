@@ -1,4 +1,4 @@
-var app, applicationDirectory, config, express, http, i, io, page, path, pub, routes;
+var app, applicationDirectory, config, express, http, io, path, pub;
 
 applicationDirectory = __dirname + '/application/';
 
@@ -19,15 +19,6 @@ io = require('socket.io')(http);
 
 pub = __dirname + '/public';
 
-
-/* Adapter */
-
-require(applicationDirectory + 'adapter')(config);
-
-require(applicationDirectory + 'controllers')();
-
-routes = require(applicationDirectory + 'routes')();
-
 app.set('views', 'views');
 
 app.set('view engine', 'ejs');
@@ -35,17 +26,21 @@ app.set('view engine', 'ejs');
 app.use(express['static'](pub));
 
 
+/* Adapter */
+
+require(applicationDirectory + 'adapter')(config);
+
+require(applicationDirectory + 'controllers').prototype.init();
+
+
 /* Routing */
 
-for (i in routes) {
-  page = routes[i];
-  app[page.type](page.link, page.control);
-}
+require(applicationDirectory + 'routes').prototype.init(app);
 
 
 /* Socket */
 
-io.on('connection', function(socket) {});
+require(applicationDirectory + 'socket').prototype.init(io);
 
 http.listen(config.port, function() {
   console.log('Server started. Link: http(s)://' + config.url + ':' + config.port);

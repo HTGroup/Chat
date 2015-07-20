@@ -31,7 +31,8 @@ define ->
                     link: 'w3.org'
                 }
             ])
-            click: ->
+            #https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Drag_and_drop
+            dragStart: ->
                 @cnt++
                 @products.add
                     name: 'Element ' + @cnt

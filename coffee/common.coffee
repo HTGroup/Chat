@@ -29,5 +29,9 @@ require.config
     return
 
 define [ 'socket' ], (io) ->
-    socket = io()
-    return
+    socket = io(window.location.href)
+    console.log io, socket
+    socket.on 'news', (data) ->
+        console.log data
+        socket.emit 'my other event', my: 'data'
+        return

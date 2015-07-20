@@ -7,5 +7,6 @@ define [ 'blocks' ], (blocks) ->
     app.Models['Product'] = App.Model(
         name: App.Property()
         version: App.Property()
-        link: App.Property())
+        link: App.Property()
+    )
     app.Models['Product']
