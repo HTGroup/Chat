@@ -1,12 +1,14 @@
-<thead>
-    <tr data-query="each(head)">
-        <th>{{name}}</th>
-    </tr>
-</thead>
-<tbody data-query="each(products)">
-    <tr>
-        <td>{{name}}</td>
-        <td>{{version}}</td>
-        <td>{{link}}</td>
-    </tr>
-</tbody>
+
+<div class="row" data-query="each(products)"><div class="col-md-4">
+    <h2>{{name}}</h2>
+    <p>{{text}}</p>
+    <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+</div>
+</div>
+<div><span></span></div>
+<div><span></span></div>
+<div>
+    <span>
+
+    </span>
+</div>
