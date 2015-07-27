@@ -8,6 +8,6 @@ _Config =
 			port: 27017
 			user: ""
 			password: ""
-			table: "test"
+			table: "siteBilder"
 
 module.exports = _Config

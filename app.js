@@ -35,12 +35,7 @@ require(applicationDirectory + 'controllers').prototype.init();
 
 /* Routing */
 
-require(applicationDirectory + 'routes').prototype.init(app);
-
-
-/* Socket */
-
-require(applicationDirectory + 'socket').prototype.init(io);
+require(applicationDirectory + 'routes').prototype.init(app, io);
 
 http.listen(config.port, function() {
   console.log('Server started. Link: http(s)://' + config.url + ':' + config.port);

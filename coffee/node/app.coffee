@@ -17,10 +17,7 @@ require(applicationDirectory + 'adapter')(config)
 require(applicationDirectory + 'controllers')::init();
 
 ### Routing ###
-require(applicationDirectory + 'routes')::init(app)
-
-### Socket ###
-require(applicationDirectory + 'socket')::init(io)
+require(applicationDirectory + 'routes')::init(app, io)
 
 http.listen config.port, ->
   console.log 'Server started. Link: http(s)://' + config.url + ':' + config.port

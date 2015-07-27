@@ -27,11 +27,3 @@ require.config
             require [ '../Views/' + el ]
             return
     return
-
-define [ 'socket' ], (io) ->
-    socket = io(window.location.href)
-    console.log io, socket
-    socket.on 'news', (data) ->
-        console.log data
-        socket.emit 'my other event', my: 'data'
-        return
