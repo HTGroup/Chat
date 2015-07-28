@@ -1,22 +1,27 @@
-var HomeModel, View, _HomeController;
+var HomeController, HomeModel, HomeSocket, View;
 
 View = require("../views/Home");
 
 HomeModel = require("../models/Home");
 
-_HomeController = {
-  run: function(req, res) {
+HomeSocket = require("../socket/HomeSocket");
+
+HomeController = (function() {
+  function HomeController() {}
+
+  HomeController.prototype.run = function(req, res) {
     var v;
     v = new View(res, 'index');
-
-    /*test = new HomeModel({name: "AAAA"})
-    test.save (err, users)->
-      console.log(err, users)
-     */
-    return v.render({
-      title: "Hello World!"
+    new HomeSocket();
+    HomeModel.find().exec(function(err, home) {
+      return v.render({
+        title: "Hello World!"
+      });
     });
-  }
-};
+  };
 
-module.exports = _HomeController;
+  return HomeController;
+
+})();
+
+module.exports = HomeController;

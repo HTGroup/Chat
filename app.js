@@ -1,4 +1,4 @@
-var app, applicationDirectory, config, express, http, i, io, page, path, pub, routes;
+var app, applicationDirectory, config, express, path, pub;
 
 applicationDirectory = __dirname + '/application/';
 
@@ -8,44 +8,42 @@ app = express();
 
 path = require('path');
 
+global["http"] = require('http').Server(app);
+
 config = require(applicationDirectory + 'config');
-
-http = require('http').Server(app);
-
-io = require('socket.io')(http);
 
 
 /* Path to express public directory */
 
-pub = __dirname + '/public';
+pub = __dirname + '/' + config.publicFolder;
+
+app.set('views', config.dirViews);
+
+app.set('view engine', config.viewEngine);
+
+app.use(express['static'](pub));
 
 
 /* Adapter */
 
 require(applicationDirectory + 'adapter')(config);
 
-require(applicationDirectory + 'controllers')();
-
-routes = require(applicationDirectory + 'routes')();
-
-app.set('views', 'views');
-
-app.set('view engine', 'ejs');
-
-app.use(express['static'](pub));
-
-
-/* Routing */
-
-for (i in routes) {
-  page = routes[i];
-  app[page.type](page.link, page.control);
-}
+require(applicationDirectory + 'class/Controller').prototype.init();
 
 
 /* Socket */
 
-io.on('connection', function(socket) {});
+if ((config != null) && config.socket) {
+  global["socketIo"] = null;
+}
+
+
+/* Routing */
+
+require(applicationDirectory + 'routes').prototype.init(app);
+
+
+/* Start server */
 
 http.listen(config.port, function() {
   console.log('Server started. Link: http(s)://' + config.url + ':' + config.port);

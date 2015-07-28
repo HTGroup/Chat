@@ -41,7 +41,7 @@ $ node app
 
 #BackEnd
 
-### Connecting to MongoDB
+### Base configuration and connect to mongo to MongoDB
 
 First, we need to specify the connection in the configuration file: index.js.
 ```sh
@@ -50,18 +50,22 @@ $ cd application/config
 For Example, we next is used for connection [`Mongoose`](https://github.com/Automattic/mongoose#connecting-to-mongodb)
 ```js
 _Config = {
-  url: '127.0.0.1',
-  port: 3000,
-  mode: 'local',
-  dataBase: {
-    mongo: {
-      host: '127.0.0.1',
-      port: 27017,
-      user: "",
-      password: "",
-      table: "test"
+    url: "127.0.0.1",
+    port: 3000,
+    mode: "local",
+    socket: true,
+    publicFolder: "public",
+    dirViews: "views",
+    viewEngine: "ejs",
+    dataBase: {
+      mongo: {
+        host: "127.0.0.1",
+        port: 27017,
+        user: "",
+        password: "",
+        table: "siteBilder"
+      }
     }
-  }
 }
 ```
 ### Defining a Model
@@ -73,16 +77,12 @@ $ cd application/models
 
 Models are defined through the Schema interface
 ```js
-Model = require("./index");
+Model = require("../class/Model");
 
-module.exports = new Model('home', {
-  name: String
+module.exports = new Model('history', {
+  name: String,
+  text: String
 });
-```
-
-And return mongoose Model
-```js
-module.exports = mongoose.model('home', homePage);
 ```
 
 Aside from defining the structure of your documents and the types of data you're storing, a Schema handles the definition of:
@@ -137,23 +137,62 @@ $ cd application/controllers
 
 Controllers are comprised of a collection of methods called actions. Action methods can be bound to routes in your application so that when a client requests the route, the bound method is executed to perform some business logic and (in most cases) generate a response.
 ```js
-var HomeModel, View, _HomeController;
 View = require("../views/Home");
 HomeModel = require("../models/Home");
+HomeSocket = require("../socket/HomeSocket");
 
-_HomeController = {
-  run: function(req, res) {
+HomeController = (function() {
+  function HomeController() {}
+
+  HomeController.prototype.run = function(req, res) {
     var v;
     v = new View(res, 'index');
-    HomeModel.find().exec(function(err, param) {
-      v.render({
-        param: param
+    new HomeSocket();
+    HomeModel.find().exec(function(err, home) {
+      return v.render({
+        title: "Hello World!"
       });
     });
-  }
-};
+  };
 
-module.exports = _HomeController;
+  return HomeController;
+
+})();
+
+module.exports = HomeController;
+```
+
+### Overview a Socket
+
+To work with the models , we need to access the folder
+```sh
+$ cd application/controllers
+```
+
+```js
+HomeModel = require("../models/Home");
+Socket = require("../class/Socket");
+
+HomeSocket = (function(superClass) {
+  extend(HomeSocket, superClass);
+
+  function HomeSocket() {
+    return HomeSocket.__super__.constructor.apply(this, arguments);
+  }
+
+  HomeSocket.prototype.init = function() {
+    if (this.isConnected()) {
+      socketIo.emit('news', {
+        hello: 'world'
+      });
+    }
+  };
+
+  return HomeSocket;
+
+})(Socket);
+
+module.exports = HomeSocket;
 ```
 
 ### Custom Routes

@@ -1,7 +1,8 @@
 var Model;
 
-Model = require("./index");
+Model = require("../class/Model");
 
-module.exports = new Model('home', {
-  name: String
+module.exports = new Model('history', {
+  name: String,
+  text: String
 });

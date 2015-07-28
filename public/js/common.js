@@ -36,8 +36,3 @@ this.loadView = function(name) {
     });
   }
 };
-
-define(['socket'], function(io) {
-  var socket;
-  socket = io();
-});

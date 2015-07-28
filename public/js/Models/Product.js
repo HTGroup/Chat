@@ -8,7 +8,10 @@ define(['blocks'], function(blocks) {
   app.Models['Product'] = App.Model({
     name: App.Property(),
     version: App.Property(),
-    link: App.Property()
+    link: App.Property(),
+    remove: function() {
+      return this.destroy(true);
+    }
   });
   return app.Models['Product'];
 });
