@@ -8,5 +8,7 @@ define [ 'blocks' ], (blocks) ->
         name: App.Property()
         version: App.Property()
         link: App.Property()
+        remove: ->
+            this.destroy(true)
     )
     app.Models['Product']

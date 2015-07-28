@@ -1,12 +1,12 @@
 View = require("../views/Home")
 HomeModel = require("../models/Home")
-HomeSocket = require("../socket/Home")
+HomeSocket = require("../socket/HomeSocket")
 
 class HomeController
-  run: (req, res, _io)->
+  run: (req, res)->
     v = new View(res, 'index')
 
-    HomeSocket::init(_io)
+    new HomeSocket()
 
     HomeModel.find().exec (err, home)->
       v.render(

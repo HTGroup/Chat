@@ -3,7 +3,7 @@ String::capitalize = ->
 
 fs = require('fs')
 path = require('path')
-dir = __dirname + '/'
+dir = __dirname + '/../controllers'
 
 class Controllers
   init: ->
@@ -13,7 +13,7 @@ class Controllers
       files.forEach (file) ->
         file = path.parse(file, '.js')
         return if file.name is "index"
-        global[file.name.capitalize()] = require('./' + file.name)
+        global[file.name.capitalize()] = require(dir + "/" + file.name)
         return
       return
     return
