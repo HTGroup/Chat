@@ -5,9 +5,6 @@ routes =
 		control: (req, res) ->
 			HomeController::run(req, res)
 			return
-		socket: (req, res) ->
-			HomeSocket::init(req, res)
-			return
 
 	about:
 		type: 'get'
